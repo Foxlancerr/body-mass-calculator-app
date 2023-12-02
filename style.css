@@ -190,6 +190,16 @@ input:hover {
   font-size: 5rem;
   color: var(--background-color);
 }
+.result .content h1:nth-child(3){
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  transition: .3s linear all;
+}
+.result .content h1:nth-child(3):hover{
+  transform: rotateZ(-20deg);
+}
 .result .bmi-display {
   padding: 30px;
   background-color: var(--background-color);
@@ -205,6 +215,7 @@ input:hover {
   font-size: 3rem;
   font-weight: 800;
 }
+
 .result .result-info {
   margin: 20px 0px;
   display: flex;
@@ -215,5 +226,9 @@ input:hover {
 .result .result-info h3 {
   color: var(--background-color);
   margin-bottom: 20px;
+  font-weight: 400;
+}
+.result .result-info p {
+  color: var(--background-color);
   font-weight: 400;
 }
