@@ -10,9 +10,13 @@ let bmiResult = document.getElementById("bmi-result");
 
 // BMI FORMULA
 function bmiFinder(weight = 0, height = 0) {
-    // Check if the input is valid (non-negative numbers)
-    return weight / (height ** 2)
+    // convertion of meter into centimeter
+    height = height / 100;
+    let result = weight / (height ** 2);
+    result = Math.round(result);
+    return result
 }
+// console.log(bmiFinder(80,40));
 
 // BMI DISPLAY RESULT BASED ON CONDITION
 function bmiValueCheck(result = 0) {
@@ -37,7 +41,7 @@ let bmiForm = document.getElementById("bmi-form")
 function formSubmit(e) {
     e.preventDefault()
     let form = new FormData(bmiForm)
-    
+
     let formDataGetted = []
     for (let [key, value] of form) {
         if (key !== "username" && key !== "age") {
@@ -46,13 +50,13 @@ function formSubmit(e) {
 
     }
     console.log(formDataGetted);
-    
+
 
     // disstructureed the data
     const [{ height }, { weight }] = formDataGetted;
 
-    const result = bmiFinder(height, weight)
-    const conditionDisplay = bmiValueCheck(result.toFixed(2))
+    const result = bmiFinder(weight, height)
+    const conditionDisplay = bmiValueCheck(result)
 
     console.log(result);
     document.getElementById("bmi-result").innerText = result;
