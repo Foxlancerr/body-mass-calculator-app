@@ -9,12 +9,13 @@ let bmiResult = document.getElementById("bmi-result");
 
 
 // BMI FORMULA
-function bmiFinder(weight, height) {
-    return weight / height * height
+function bmiFinder(weight = 0, height = 0) {
+    // Check if the input is valid (non-negative numbers)
+    return weight / (height ** 2)
 }
 
 // BMI DISPLAY RESULT BASED ON CONDITION
-function bmiValueCheck(result) {
+function bmiValueCheck(result = 0) {
     if (result < 18.5) {
         return "Underweight";
     } else if (result > 18.5 && result < 22.9) {
@@ -29,18 +30,37 @@ function bmiValueCheck(result) {
 }
 
 // FORM HANDLING
-// let bmiForm = document.getElementById("btn-submit")
+let btnSubmit = document.getElementById("btn-submit")
 let bmiForm = document.getElementById("bmi-form")
-console.log(bmiForm);
+// console.log(bmiForm);
 
-
-
-bmiForm.addEventListener("click", (e) => {
+function formSubmit(e) {
     e.preventDefault()
-    // resultBox.style.display = "flex";
-    console.log(e.currentTarget);
+    let form = new FormData(bmiForm)
     
-})
+    let formDataGetted = []
+    for (let [key, value] of form) {
+        if (key !== "username" && key !== "age") {
+            formDataGetted.push({ [key]: Number(value) })
+        }
+
+    }
+    console.log(formDataGetted);
+    
+
+    // disstructureed the data
+    const [{ height }, { weight }] = formDataGetted;
+
+    const result = bmiFinder(height, weight)
+    const conditionDisplay = bmiValueCheck(result.toFixed(2))
+
+    console.log(result);
+    document.getElementById("bmi-result").innerText = result;
+    document.getElementById("bmi-condition").innerText = `( ${conditionDisplay} )`;
+    resultBox.style.display = "flex";
+}
+
+btnSubmit.addEventListener("click", e => formSubmit(e))
 
 // RESULT CLOSING
 let closeResultBox = document.getElementById("result-box");
